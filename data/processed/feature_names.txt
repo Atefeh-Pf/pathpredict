@@ -1,0 +1,12 @@
+einkommenj1
+anz_kind
+anz_pers
+gesund_org
+lebensz_org
+syear
+arbeitslosenquote
+schulabg_ohne_abschluss
+abiturquote
+kinderarmut
+betreuungsquote
+medianeinkommen

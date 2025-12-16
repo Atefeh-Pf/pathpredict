@@ -1,0 +1,17 @@
+cluster_id,bundesland,distanz,quality
+0,Bremen,0.24,SEHR_GUT
+1,Sachsen,0.449,SEHR_GUT
+2,Rheinland-Pfalz,1.021,MITTEL
+3,Hessen,0.313,SEHR_GUT
+4,Nordrhein-Westfalen,2.34,SCHWACH
+5,Schleswig-Holstein,0.867,GUT
+6,Berlin,0.367,SEHR_GUT
+7,Baden-Württemberg,0.683,GUT
+8,Bayern,1.334,MITTEL
+9,Niedersachsen,0.746,GUT
+10,Brandenburg,1.556,SCHWACH
+11,Thüringen,0.592,GUT
+12,Saarland,0.901,GUT
+13,Mecklenburg-Vorpommern,0.751,GUT
+14,Sachsen-Anhalt,0.882,GUT
+15,Hamburg,1.249,MITTEL
