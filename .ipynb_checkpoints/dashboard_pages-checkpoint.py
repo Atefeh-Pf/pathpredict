@@ -301,51 +301,45 @@ def show_prediction_tool(model, scaler, feature_names, df):
     
     # Predict-Button
     if st.button('🎯 Vorhersage berechnen', type='primary', use_container_width=True):
-        try:
-            # Erstelle Feature-Array
-            X_input = np.array([list(input_values.values())])
-            
-            # Standardisiere
-            X_scaled = scaler.transform(X_input)
-            
-            # Vorhersage
-            prediction = model.predict(X_scaled)[0]
-            probability = model.predict_proba(X_scaled)[0]
-            
-            # Zeige Ergebnis
-            st.markdown('---')
-            st.subheader('📊 Ergebnis')
-            
-            # Spalten für Ausgabe
-            res_col1, res_col2 = st.columns(2)
-            
-            with res_col1:
-                # Vorhersage
-                if prediction == 1:
-                    st.success('✅ **High Education** (>=12 Jahre)')
-                else:
-                    st.error('❌ **Lower Education** (<12 Jahre)')
-            
-            with res_col2:
-                # Wahrscheinlichkeit - WICHTIG: Konvertiere zu Python float!
-                prob_high = float(probability[1] * 100)
-                st.metric('Wahrscheinlichkeit High Education', f'{prob_high:.1f}%')
-            
-            # Progress Bar - Jetzt ist prob_high garantiert ein float
-            st.progress(prob_high / 100)
-            
-            # Interpretation
-            st.markdown('---')
-            st.subheader('💡 Interpretation')
-            
-            if prob_high >= 70:
-                st.success('Hohe Wahrscheinlichkeit für Bildungserfolg!')
-            elif prob_high >= 50:
-                st.warning('Mittlere Wahrscheinlichkeit. Regionale Förderung könnte helfen.')
-            else:
-                st.error('Niedrige Wahrscheinlichkeit. Gezielte Interventionen empfohlen.')
+        # Erstelle Feature-Array
+        X_input = np.array([list(input_values.values())])
         
-        except Exception as e:
-            # Fehlerbehandlung
-            st.error(f'Fehler bei der Vorhersage: {str(e)}')
-            st.info('Bitte überprüfe, ob alle Input-Werte korrekt sind.')
+        # Standardisiere
+        X_scaled = scaler.transform(X_input)
+        
+        # Vorhersage
+        prediction = model.predict(X_scaled)[0]
+        probability = model.predict_proba(X_scaled)[0]
+        
+        # Zeige Ergebnis
+        st.markdown('---')
+        st.subheader('📊 Ergebnis')
+        
+        # Spalten für Ausgabe
+        res_col1, res_col2 = st.columns(2)
+        
+        with res_col1:
+            # Vorhersage
+            if prediction == 1:
+                st.success('✅ **High Education** (>=12 Jahre)')
+            else:
+                st.error('❌ **Lower Education** (<12 Jahre)')
+        
+        with res_col2:
+            # Wahrscheinlichkeit
+            prob_high = probability[1] * 100
+            st.metric('Wahrscheinlichkeit High Education', f'{prob_high:.1f}%')
+        
+        # Progress Bar
+        st.progress(prob_high / 100)
+        
+        # Interpretation
+        st.markdown('---')
+        st.subheader('💡 Interpretation')
+        
+        if prob_high >= 70:
+            st.success('Hohe Wahrscheinlichkeit für Bildungserfolg!')
+        elif prob_high >= 50:
+            st.warning('Mittlere Wahrscheinlichkeit. Regionale Förderung könnte helfen.')
+        else:
+            st.error('Niedrige Wahrscheinlichkeit. Gezielte Interventionen empfohlen.')
